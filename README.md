@@ -1,49 +1,60 @@
-# Ellos-Drive
+# Ellos Drive
 
-Aplicação desenvolvida para autenticação e autorização de usuários ao drive da Ellos - Produtos Personalizados. 
+Sistema de login.
 
-## Endpoints
+### Pré-requisitos:
 
-### 1. Login do Usuário
-- **Endpoint da API**: `POST /api/auth/login`
-- **Endpoint da Aplicação**: `/login`
+- [PHP 8.1](https://www.php.net/)
+- [Composer](https://getcomposer.org/)
+- [Node.js](https://nodejs.org/en/)
+- [NPM](https://www.npmjs.com/)
 
-#### Descrição
-Este endpoint permite que usuários façam login na aplicação.
+### Configuração:
 
-#### Parâmetros
-- `email` (string): O e-mail do usuário.
-- `password` (string): A senha do usuário.
+1. Clone o repositório
 
-#### Resposta de Sucesso
-- **Código**: 200 OK
-- **Exemplo de Resposta**:
-  ```json
-  {
-      "success": true,
-      "message": "Login efetuado com sucesso!",
-      "data": {
-        "user": {
-          "id": 1,
-          "name": "Daniel",
-          "email": "teste@ellos.com",
-          "email_verified_at": "2023-12-30T15:20:18.000000Z",
-          "created_at": "2023-12-30T15:20:18.000000Z",
-          "updated_at": "2023-12-30T15:20:18.000000Z"
-        },
-        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3MDM5NDk2MjksImV4cCI6MTcwMzk1MzIyOSwibmJmIjoxNzAzOTQ5NjI5LCJqdGkiOiJhMXFZS0FDR1czUXI2OUtRIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.6_FxqOb2ROsCas738Bs0MPsIMUoosigDJlL-rs70plM"
-      }
-  }
+```bash
+git clone https://github.com/BCode-Volunteer/Ellos-Drive
+```
 
-  ```
+2. Instale as dependências do PHP
 
-#### Resposta de Erro
-- **Código**: 404 Not Found
-- **Exemplo de Resposta**:
-  ```json
-  {
-  "success": false,
-  "message": "Email ou senha inválidos!",
-  "code": 404
-  }
-  ```
+```bash
+    composer install
+```
+
+3. Instale as dependências do Node.js
+
+```bash
+    npm install
+```
+
+4. Copie o arquivo .env.example para .env
+
+```bash
+    cp .env.example .env
+```
+
+5. Gere uma nova chave para a aplicação
+
+```bash
+    php artisan key:generate
+```
+
+6. Gerar chave para JWT
+
+```bash
+    php artisan jwt:secret
+```
+
+8. Crie o banco de dados
+
+```bash
+    php artisan migrate
+```
+
+7. Inicie o servidor
+
+```bash
+    php artisan serve
+```

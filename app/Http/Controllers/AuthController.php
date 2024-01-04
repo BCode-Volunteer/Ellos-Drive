@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
@@ -26,12 +26,11 @@ class AuthController extends Controller
         try{
             $credentials = $request->validated();
             $token = $this->authService->login($credentials);
-            return ResponseService::success([
-                'user' => auth()->user(),
-                'token' => $token
-            ], 'Login efetuado com sucesso!');
+            return redirect(env('GOOGLE_DRIVE'));
         } catch(Exception $e){
-            return ResponseService::exception($e, Response::HTTP_NOT_FOUND);
+            $errorMessage = $e->getMessage();
+            return view('login-page')->with('errorMessage', $errorMessage);
+            // return ResponseService::exception($e, Response::HTTP_NOT_FOUND);
         }
     }
 }

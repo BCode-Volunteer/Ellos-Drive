@@ -26,6 +26,7 @@ body {
     font-size: 22px;
     font-weight: 600;
     color: #333;
+    text-align: center;
 }
 .container form {
     margin-top: 30px;
@@ -94,4 +95,11 @@ form .input-field {
 }
 .button input:hover {
     background-color: #0e4bf1;
+}
+
+.error-message {
+    background-color: #f44336; 
+    color: white; 
+    padding: 10px; 
+    margin-bottom: 20px; 
 }

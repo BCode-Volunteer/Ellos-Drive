@@ -1,70 +1,65 @@
-const form = document.querySelector('form'),
-    emailField = form.querySelector('.email-field'),
-    emailInput = emailField.querySelector('.email'),
-    passField = form.querySelector('.create-password'),
-    passInput = passField.querySelector('.password'),
-    cPassField = form.querySelector('.confirm-password'),
-    cPassInput = cPassField.querySelector('.cPassword');
+const form = document.querySelector('form');
+const emailField = form.querySelector('.email-field');
+const emailInput = emailField.querySelector('.email');
+const passField = form.querySelector('.create-password');
+const passInput = passField.querySelector('.password');
+const showHideIcons = passField.querySelectorAll('.show-hide');
 
-// Email Validtion
-function checkEmail() {
-    const emaiPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-    if (!emailInput.value.match(emaiPattern)) {
-        return emailField.classList.add('invalid'); //adding invalid class if email value do not mathced with email pattern
-    }
-    emailField.classList.remove('invalid'); //removing invalid class if email value matched with emaiPattern
-}
-
-// Hide and show password
-const eyeIcons = document.querySelectorAll('.show-hide');
-
-eyeIcons.forEach((eyeIcon) => {
-    eyeIcon.addEventListener('click', () => {
-        const pInput = eyeIcon.parentElement.querySelector('input'); //getting parent element of eye icon and selecting the password input
-        if (pInput.type === 'password') {
-            eyeIcon.classList.replace('bx-hide', 'bx-show');
-            return (pInput.type = 'text');
+showHideIcons.forEach((showHideIcon) => {
+    showHideIcon.addEventListener('click', () => {
+        const passwordInput = showHideIcon.parentElement.querySelector('.password');
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            showHideIcon.classList.replace('bx-hide', 'bx-show');
+        } else {
+            passwordInput.type = 'password';
+            showHideIcon.classList.replace('bx-show', 'bx-hide');
         }
-        eyeIcon.classList.replace('bx-show', 'bx-hide');
-        pInput.type = 'password';
     });
 });
 
-// Password Validation
+
+emailInput.addEventListener('input', checkEmail);
+passInput.addEventListener('input', createPass);
+cPassInput.addEventListener('input', confirmPass);
+
+function checkEmail() {
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!emailInput.value.match(emailPattern)) {
+        emailField.classList.add('invalid');
+    } else {
+        emailField.classList.remove('invalid');
+    }
+}
+
 function createPass() {
     const passPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
     if (!passInput.value.match(passPattern)) {
-        return passField.classList.add('invalid'); //adding invalid class if password input value do not match with passPattern
+        passField.classList.add('invalid');
+    } else {
+        passField.classList.remove('invalid');
     }
-    passField.classList.remove('invalid'); //removing invalid class if password input value matched with passPattern
 }
 
-// Confirm Password Validtion
 function confirmPass() {
     if (passInput.value !== cPassInput.value || cPassInput.value === '') {
-        return cPassField.classList.add('invalid');
+        cPassField.classList.add('invalid');
+    } else {
+        cPassField.classList.remove('invalid');
     }
-    cPassField.classList.remove('invalid');
 }
 
-// Calling Funtion on Form Sumbit
 form.addEventListener('submit', (e) => {
-    e.preventDefault(); //preventing form submitting
+    e.preventDefault();
+
     checkEmail();
     createPass();
     confirmPass();
 
-    //calling function on key up
-    emailInput.addEventListener('keyup', checkEmail);
-    passInput.addEventListener('keyup', createPass);
-    cPassInput.addEventListener('keyup', confirmPass);
-
-    if (
-        !emailField.classList.contains('invalid') &&
-        !passField.classList.contains('invalid') &&
-        !cPassField.classList.contains('invalid')
-    ) {
+    if (!emailField.classList.contains('invalid') && 
+        !passField.classList.contains('invalid') && 
+        !cPassField.classList.contains('invalid')) {
         location.href = form.getAttribute('action');
     }
 });

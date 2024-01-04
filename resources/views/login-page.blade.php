@@ -18,9 +18,16 @@
     />
   </head>
   <body>
+    
     <div class="container">
       <header>Ellos Drive</header>
-      <form method="POST" action="http://localhost:8000/api/auth/login">
+      @isset($errorMessage)
+        <div class="error-message">
+              <p>{{ $errorMessage }}</p>
+        </div>
+      @endisset 
+      <form method="POST" action='/login'>
+        @csrf
         <div class="field email-field">
           <div class="input-field">
             <input type="email" placeholder="Digite seu email" class="email" name="email"/>
