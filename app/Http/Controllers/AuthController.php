@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\RoleEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
@@ -26,11 +27,14 @@ class AuthController extends Controller
         try{
             $credentials = $request->validated();
             $token = $this->authService->login($credentials);
+            $user = User::where('email', $credentials['email'])->firstOrFail();
+            if($user->role === RoleEnum::ADMIN->value) {
+                return $token;
+            }
             return redirect(env('GOOGLE_DRIVE'));
         } catch(Exception $e){
             $errorMessage = $e->getMessage();
             return view('login-page')->with('errorMessage', $errorMessage);
-            // return ResponseService::exception($e, Response::HTTP_NOT_FOUND);
         }
     }
 }

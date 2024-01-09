@@ -12,5 +12,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/login', 'login');
 });
 
-
-
+Route::group(['prefix' => '/register', 'middleware' => 'jwt.verify'], function () {
+    Route::controller();
+});

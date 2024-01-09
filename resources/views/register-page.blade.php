@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - codingnepalweb.com -->
-<html lang="en">
+<!-- Criado por Daniel Rodrigues - daniel-rodrigues.onrender.com -->
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Email and Password Validation</title>
+    <title>Ellos Drive - Register</title>
 
     <!-- CSS -->
     <link href="css/login-register.css" rel="stylesheet" type="text/css" />
@@ -18,56 +18,52 @@
     />
   </head>
   <body>
+    
     <div class="container">
-      <header>Signup</header>
-      <form action="https://www.codinglabweb.com/">
+      <header>Ellos Drive</header>
+      @isset($errorMessage)
+        <div class="error-message">
+              <p>{{ $errorMessage }}</p>
+        </div>
+      @endisset 
+      <form method="POST" action='/register'>
+        @csrf
         <div class="field email-field">
           <div class="input-field">
-            <input type="email" placeholder="Enter your email" class="email" />
+            <input type="email" placeholder="Digite o nome" class="email" name="name"/>
+          </div>
+          <div class="input-field">
+            <input type="email" placeholder="Digite o email" class="email" name="email"/>
           </div>
           <span class="error email-error">
             <i class="bx bx-error-circle error-icon"></i>
-            <p class="error-text">Please enter a valid email</p>
+            <p class="error-text">Por favor, insira um email válido</p>
           </span>
         </div>
         <div class="field create-password">
           <div class="input-field">
             <input
               type="password"
-              placeholder="Create password"
+              placeholder="Digite a senha"
               class="password"
+              name="password"
             />
             <i class="bx bx-hide show-hide"></i>
           </div>
           <span class="error password-error">
             <i class="bx bx-error-circle error-icon"></i>
             <p class="error-text">
-              Please enter atleast 8 charatcer with number, symbol, small and
-              capital letter.
+              Por favor, insira a senha.
             </p>
           </span>
         </div>
-        <div class="field confirm-password">
-          <div class="input-field">
-            <input
-              type="password"
-              placeholder="Confirm password"
-              class="cPassword"
-            />
-            <i class="bx bx-hide show-hide"></i>
-          </div>
-          <span class="error cPassword-error">
-            <i class="bx bx-error-circle error-icon"></i>
-            <p class="error-text">Password don't match</p>
-          </span>
-        </div>
         <div class="input-field button">
-          <input type="submit" value="Submit Now" />
+          <input type="submit" value="Login" />
         </div>
       </form>
     </div>
 
     <!-- JavaScript -->
-   <script src="js/login-register.js"></script>
+    <script src="js/login-register.js"></script>
   </body>
 </html>
