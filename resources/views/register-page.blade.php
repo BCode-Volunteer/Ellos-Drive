@@ -8,7 +8,7 @@
     <title>Ellos Drive - Register</title>
 
     <!-- CSS -->
-    <link href="css/login-register.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('css/login-register.css') }}" rel="stylesheet" type="text/css" />
 
 
     <!-- Boxicons CSS -->
@@ -25,13 +25,20 @@
         <div class="error-message">
               <p>{{ $errorMessage }}</p>
         </div>
-      @endisset 
-      <form method="POST" action='/register'>
+      @endisset
+      @isset($sucessMessage)
+        <div class="sucess-message">
+              <p>{{ $sucessMessage }}</p>
+        </div>
+      @endisset  
+      <form method="POST" action='/admin/registerClient?token={{ $token }}'>
         @csrf
         <div class="field email-field">
           <div class="input-field">
-            <input type="email" placeholder="Digite o nome" class="email" name="name"/>
+            <input type="text" placeholder="Digite o nome" class="email" name="name"/>
           </div>
+        </div>
+        <div class="field email-field">
           <div class="input-field">
             <input type="email" placeholder="Digite o email" class="email" name="email"/>
           </div>
@@ -58,7 +65,7 @@
           </span>
         </div>
         <div class="input-field button">
-          <input type="submit" value="Login" />
+          <input type="submit" value="Registrar" />
         </div>
       </form>
     </div>

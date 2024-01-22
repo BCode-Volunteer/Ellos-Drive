@@ -103,3 +103,10 @@ form .input-field {
     padding: 10px; 
     margin-bottom: 20px; 
 }
+
+.sucess-message {
+    background-color: #7ff436; 
+    color: white; 
+    padding: 10px; 
+    margin-bottom: 20px; 
+}

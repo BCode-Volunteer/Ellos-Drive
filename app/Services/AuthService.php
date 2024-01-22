@@ -30,8 +30,6 @@ class AuthService implements IAuthService
             'password' => bcrypt($credentials['password']),
             'role' => $role
         ]);
-        dd($user);
-
         return true;
     } 
 }

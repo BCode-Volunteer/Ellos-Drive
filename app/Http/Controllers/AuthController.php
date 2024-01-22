@@ -7,10 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use App\Services\IAuthService;
-use App\Services\ResponseService;
 use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class AuthController extends Controller
 {
@@ -29,7 +26,7 @@ class AuthController extends Controller
             $token = $this->authService->login($credentials);
             $user = User::where('email', $credentials['email'])->firstOrFail();
             if($user->role === RoleEnum::ADMIN->value) {
-                return $token;
+                return redirect()->route('admin.register.view', ['token' => $token]);
             }
             return redirect(env('GOOGLE_DRIVE'));
         } catch(Exception $e){
