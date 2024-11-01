@@ -23,7 +23,7 @@ class AdminController extends Controller
 
     public function registerClientView(Request $request)
     {
-        return view('register-page', ['token' => $request->get('token')]);
+        return view('admin.register-page', ['token' => $request->get('token')]);
     }
 
     public function registerClient(RegisterRequest $request)
@@ -32,9 +32,9 @@ class AdminController extends Controller
         $role = RoleEnum::CLIENT->value;
         try {
             $this->authService->register($credentials, $role);
-            return view('register-page', ['token' => $request->get('token')])->with("sucessMessage", "Sucesso ao cadastrar usuario");
+            return view('admin.register-page', ['token' => $request->get('token')])->with("sucessMessage", "Sucesso ao cadastrar usuario");
         } catch(UsuarioCadastradoException $e) {
-            return view('register-page', ['token' => $request->get('token')])->with("errorMessage", "Usuario já cadastrado");
+            return view('admin.register-page', ['token' => $request->get('token')])->with("errorMessage", "Usuario já cadastrado");
         }
     }
 }

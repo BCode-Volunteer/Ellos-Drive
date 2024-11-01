@@ -20,8 +20,9 @@ class JwtMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         try {
-            JWTAuth::parseToken()->authenticate();
-            $request->attributes->add(['token' => JWTAuth::getToken()]);
+            $token = session('auth');
+            JWTAuth::setToken($token)->authenticate();
+            $request->attributes->add(['token' => $token]);
         } catch (\Exception $e) {
             if ($e instanceof TokenInvalidException) {
                 return ResponseService::exception($e, 401, 'Token inválido.');
